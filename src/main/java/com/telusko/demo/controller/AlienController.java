@@ -4,8 +4,10 @@ import com.telusko.demo.dao.AlienRepo;
 import com.telusko.demo.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,16 +27,16 @@ public class AlienController {
         return "home.jsp";
     }
 
-    @RequestMapping("/getAlien")
-    public ModelAndView getAlien(@RequestParam int aid)
+    @RequestMapping("/aliens")
+    @ResponseBody
+    public String getAliens()
     {
-        ModelAndView mv = new ModelAndView("showAlien.jsp");
-        Alien alien = repo.findById(aid).orElse(new Alien());
-
-        System.out.println(repo.findByTech("JS"));
-        System.out.println(repo.findByAidGreaterThan(23));
-
-        mv.addObject(alien);
-        return mv;
+        return repo.findAll().toString();
+    }
+    @RequestMapping("/alien/{aid}")
+    @ResponseBody
+    public String getAlien(@PathVariable("aid") int aid)
+    {
+        return repo.findById(aid).toString();
     }
 }
