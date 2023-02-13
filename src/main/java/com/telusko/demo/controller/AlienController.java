@@ -27,6 +27,12 @@ public class AlienController {
 
         return "deleted";
    }
+    @PutMapping (path= "/alien", consumes = {"application/json"})
+    public Alien saveOrUpdateAlien(@RequestBody Alien alien)
+    {
+        repo.save(alien);
+        return alien;
+    }
 
     @PostMapping(path= "/alien", consumes = {"application/json"})
     public Alien addAlien(@RequestBody Alien alien)
