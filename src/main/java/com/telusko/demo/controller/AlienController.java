@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class AlienController {
 
@@ -27,16 +30,16 @@ public class AlienController {
         return "home.jsp";
     }
 
-    @RequestMapping("/aliens")
+    @RequestMapping(path="/aliens", produces = {"application/xml"})
     @ResponseBody
-    public String getAliens()
+    public List<Alien> getAliens()
     {
-        return repo.findAll().toString();
+        return repo.findAll();
     }
     @RequestMapping("/alien/{aid}")
     @ResponseBody
-    public String getAlien(@PathVariable("aid") int aid)
+    public Optional<Alien> getAlien(@PathVariable("aid") int aid)
     {
-        return repo.findById(aid).toString();
+        return repo.findById(aid);
     }
 }
