@@ -18,4 +18,3 @@ Link for the tutorial: https://www.youtube.com/watch?v=35EQXmHKZYs&t=3647s
   - AOP
   - ...
  
-## Dependency Injection?
